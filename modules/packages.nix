@@ -3,6 +3,7 @@
 {
   # Define packages to be installed for the user via Home Manager
   home.packages = with pkgs; [
+    devenv
     nixd
     zellij
     bat
@@ -32,11 +33,8 @@
     imagemagick
     graphicsmagick
     flac
-    neovim
-    libsndfile
     python311Packages.numpy
     openblas
-    rubberband
   ];
 
 }

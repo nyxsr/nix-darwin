@@ -9,12 +9,13 @@
       bdev = "bun dev";
       nprdev = "npm run dev";
       zl = "zellij";
+      cd = "z";
     };
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "fzf" "you-should-use" ];
-      theme = "robbyrussell";
+      plugins = [ "git" "docker" "fzf" "zoxide" "z" "thefuck" "sudo" "kubectl" "kitty" ];
+      theme = "minimal";
     };
   };
 }

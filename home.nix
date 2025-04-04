@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
+    ./modules/nvim.nix
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/packages.nix
