@@ -22,11 +22,11 @@
      "nikitabobko/tap/aerospace"
      "figma"
      "kitty"
-     "raycast"
      "obsidian"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp
+      "Amphetamine" = 937984704;
    	};
   };
 }

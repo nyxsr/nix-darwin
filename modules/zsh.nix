@@ -17,5 +17,12 @@
       plugins = [ "git" "docker" "fzf" "zoxide" "z" "thefuck" "sudo" "kubectl" "kitty" ];
       theme = "minimal";
     };
+
+    initExtra = ''
+      reload_darwin() {
+        cd /etc/nix-darwin
+        darwin-rebuild switch --flake ".#nyxsr"
+      }
+    '';
   };
 }
