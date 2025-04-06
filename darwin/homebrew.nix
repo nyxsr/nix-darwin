@@ -23,10 +23,12 @@
      "figma"
      "kitty"
      "obsidian"
+      "pika"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp
       "Amphetamine" = 937984704;
+      "RoboForm Password Manager" = 1464513335;
    	};
   };
 }

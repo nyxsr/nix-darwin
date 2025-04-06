@@ -34,6 +34,10 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, homebrew-services, home-manager }:
   let
     configuration = { pkgs, config, inputs, ... }: {
+      environment.variables = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+      };
 
       nixpkgs.config.allowUnfree = true;
       # List packages installed in system profile. To search by name, run:
