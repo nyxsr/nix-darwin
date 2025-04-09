@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
   programs.zsh = {
     enable = true;
+    autocd = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     shellAliases = {
@@ -18,11 +19,15 @@
       theme = "minimal";
     };
 
-    initExtra = ''
-      reload_darwin() {
-        cd /etc/nix-darwin
-        darwin-rebuild switch --flake ".#nyxsr"
-      }
-    '';
+initExtra = ''
+  reload_darwin() {
+    cd /etc/nix-darwin
+    darwin-rebuild switch --flake ".#nyxsr"
+  }
+
+  app_id() {
+    osascript -e "id of app \"$1\""
+  }
+'';
   };
 }

@@ -23,7 +23,9 @@
      "figma"
      "kitty"
      "obsidian"
-      "pika"
+     "pika"
+     "google-chrome"
+     "ubersicht"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp

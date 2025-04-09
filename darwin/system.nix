@@ -47,6 +47,7 @@
         AppleShowAllExtensions = false;
         QuitMenuItem = true;
         ShowStatusBar = true;
+        ShowPathbar = true;
       };
       loginwindow = {
         GuestEnabled = false;
