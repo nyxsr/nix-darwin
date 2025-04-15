@@ -12,7 +12,6 @@
       "FelixKratz/formulae"
     ];
     brews = [
-      "sketchybar"
       "borders"
     ];
     casks = [
@@ -23,14 +22,14 @@
      "figma"
      "kitty"
      "obsidian"
-     "pika"
      "google-chrome"
      "ubersicht"
+     "alacritty"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp
-      "Amphetamine" = 937984704;
-      "RoboForm Password Manager" = 1464513335;
+     "Amphetamine" = 937984704;
+     "RoboForm Password Manager" = 1464513335;
    	};
   };
 }

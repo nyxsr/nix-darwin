@@ -28,6 +28,8 @@ initExtra = ''
   app_id() {
     osascript -e "id of app \"$1\""
   }
+
+  export KUBECONFIG=/Users/nyxsr/Downloads/config-no-tunnel.backup.yaml
 '';
   };
 }

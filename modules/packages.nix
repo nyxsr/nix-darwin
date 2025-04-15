@@ -36,6 +36,8 @@
     flac
     python311Packages.numpy
     openblas
+    kubectl
+    kubernetes-helm
   ];
 
 }
