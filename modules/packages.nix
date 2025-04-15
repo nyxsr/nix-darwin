@@ -24,11 +24,8 @@
     hasura-cli
     python311
     nodejs
-    go
     bun
     yarn
-    gcc
-    cmake
     pkg-config
     ffmpeg
     imagemagick

@@ -25,6 +25,7 @@
      "google-chrome"
      "ubersicht"
      "alacritty"
+     "pika"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp
