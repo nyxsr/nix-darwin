@@ -21,8 +21,8 @@
     zoxide
     oh-my-posh
     eza
-    hasura-cli
     python311
+    hasura-cli
     nodejs
     bun
     yarn

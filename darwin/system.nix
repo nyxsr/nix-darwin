@@ -35,8 +35,9 @@
              	"/Applications/Opera.app"
              	"/System/Applications/Calendar.app"
              	"/Applications/Zed.app"
-             	"/Applications/Kitty.app"
              	"/Applications/Discord.app"
+              "/Applications/Alacritty.app"
+              "/Applications/Obsidian.app"
              	"/System/Applications/System Settings.app"
              	"/Applications/Whatsapp.app"
          	];

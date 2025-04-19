@@ -20,12 +20,12 @@
   	 "orbstack"
      "nikitabobko/tap/aerospace"
      "figma"
-     "kitty"
      "obsidian"
      "google-chrome"
      "ubersicht"
      "alacritty"
      "pika"
+     "mongodb-compass"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp
