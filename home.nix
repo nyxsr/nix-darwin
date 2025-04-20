@@ -7,8 +7,8 @@
     ./modules/packages.nix
   ];
 
-  home.username = "nyxsr";
-  home.homeDirectory = lib.mkForce "/Users/nyxsr";
+  home.username = "sahrulramdan";
+  home.homeDirectory = lib.mkForce "/Users/sahrulramdan";
 
   programs.home-manager.enable = true;
 

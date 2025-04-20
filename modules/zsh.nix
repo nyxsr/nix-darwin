@@ -21,15 +21,15 @@
 
 initExtra = ''
   reload_darwin() {
-    cd /etc/nix-darwin
-    darwin-rebuild switch --flake ".#nyxsr"
+    cd ~/.config/nix-darwin
+    darwin-rebuild switch --flake ".#sahrulramdan"
   }
 
   app_id() {
     osascript -e "id of app \"$1\""
   }
 
-  export KUBECONFIG=/Users/nyxsr/Downloads/config-no-tunnel.backup.yaml
+  export KUBECONFIG=/Users/sahrulramdan/Downloads/config-no-tunnel.backup.yaml
 '';
   };
 }

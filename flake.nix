@@ -1,5 +1,5 @@
 {
-  description = "NyxSR nix-darwin system flake";
+  description = "sahrulramdan nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -62,7 +62,7 @@
     };
   in
   {
-    darwinConfigurations."nyxsr" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."sahrulramdan" = nix-darwin.lib.darwinSystem {
       modules = [
       { nix.enable = false; }
         configuration
@@ -76,7 +76,7 @@
        	{
       		home-manager.useGlobalPkgs = true;
       		home-manager.useUserPackages = true;
-      		home-manager.users.nyxsr = import ./home.nix;
+      		home-manager.users.sahrulramdan = import ./home.nix;
        	}
         {
             nix-homebrew = {
@@ -87,7 +87,7 @@
             enableRosetta = true;
 
             # User owning the Homebrew prefix
-            user = "nyxsr";
+            user = "sahrulramdan";
 
             # Optional: Declarative tap management
             taps = {

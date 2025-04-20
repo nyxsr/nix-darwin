@@ -26,6 +26,7 @@
      "alacritty"
      "pika"
      "mongodb-compass"
+     "discord"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997; # Whatsapp

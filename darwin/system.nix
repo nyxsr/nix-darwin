@@ -50,9 +50,6 @@
         ShowStatusBar = true;
         ShowPathbar = true;
       };
-      loginwindow = {
-        GuestEnabled = false;
-      };
       trackpad = {
         Clicking = true;
         TrackpadThreeFingerDrag = true;
