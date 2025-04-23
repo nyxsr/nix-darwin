@@ -15,7 +15,13 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "fzf" "zoxide" "z" "thefuck" "sudo" "kubectl" "kitty" ];
+      plugins = [ "git" "docker" "fzf" "zoxide" "z" "thefuck" "sudo" "kubectl" "kitty"];
+      custom = "${pkgs.fetchFromGitHub {
+            owner = "MichaelAquilina";
+            repo = "zsh-you-should-use";
+            rev = "master";
+            sha256 = "XbTZpyUIpALsVezqnIfz7sV26hMi8z+2dW0mL2QbVIE=";
+        }}";
       theme = "minimal";
     };
 
