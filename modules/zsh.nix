@@ -11,6 +11,9 @@
       nprdev = "npm run dev";
       zl = "zellij";
       cd = "z";
+      devsh = "devenv shell";
+      devup = "devenv up";
+      devgc = "devenv gc";
     };
 
     oh-my-zsh = {
