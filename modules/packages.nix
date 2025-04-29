@@ -3,6 +3,7 @@
 {
   # Define packages to be installed for the user via Home Manager
   home.packages = with pkgs; [
+    act
     doggo
     k9s
     kubectx

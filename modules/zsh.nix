@@ -38,7 +38,12 @@ initExtra = ''
     osascript -e "id of app \"$1\""
   }
 
-  export KUBECONFIG=/Users/sahrulramdan/Downloads/config-no-tunnel.backup.yaml
+  mkdir -p ~/.kube/merged
+
+  KUBECONFIG=$(ls ~/.kube/configs/* 2>/dev/null | tr '\n' ':' | sed 's/:$//') \
+  kubectl config view --merge --flatten > ~/.kube/merged/config
+
+  export KUBECONFIG=~/.kube/merged/config
 '';
   };
 }
