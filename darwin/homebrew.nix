@@ -28,11 +28,11 @@
      "mongodb-compass"
      "discord"
      "apidog"
+     "google-cloud-sdk"
     ];
    	masApps = {
-  	 "Whatsapp Messenger" = 310633997; # Whatsapp
+  	 "Whatsapp Messenger" = 310633997;
      "Amphetamine" = 937984704;
-     "RoboForm Password Manager" = 1464513335;
    	};
   };
 }
