@@ -13,6 +13,7 @@
     ];
     brews = [
       "borders"
+      "lolcat"
     ];
     casks = [
   	 "zed"
