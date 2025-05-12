@@ -21,7 +21,7 @@
          	mouse-over-hilite-stack = true;
          	magnification = false;
          	mru-spaces = false;
-         	orientation = "bottom";
+         	orientation = "left";
          	show-process-indicators = true;
          	show-recents = false;
          	showhidden = true;
@@ -34,7 +34,6 @@
          	persistent-apps = [
              	"/Applications/Opera.app"
              	"/System/Applications/Calendar.app"
-             	"/Applications/Zed.app"
              	"/Applications/Discord.app"
               "/Applications/Ghostty.app"
               "/Applications/Obsidian.app"

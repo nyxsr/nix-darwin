@@ -14,6 +14,7 @@
       devsh = "devenv shell";
       devup = "devenv up";
       devgc = "devenv gc";
+      n = "nvim";
     };
 
     oh-my-zsh = {

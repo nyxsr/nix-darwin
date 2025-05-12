@@ -16,7 +16,6 @@
       "lolcat"
     ];
     casks = [
-  	 "zed"
   	 "opera"
   	 "orbstack"
      "nikitabobko/tap/aerospace"
@@ -26,7 +25,6 @@
      "ubersicht"
      "alacritty"
      "pika"
-     "mongodb-compass"
      "discord"
      "apidog"
      "google-cloud-sdk"
