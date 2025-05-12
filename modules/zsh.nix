@@ -28,7 +28,7 @@
       theme = "minimal";
     };
 
-initExtra = ''
+initContent = ''
   reload_darwin() {
     cd ~/.config/nix-darwin
     darwin-rebuild switch --flake ".#sahrulramdan"
@@ -44,6 +44,7 @@ initExtra = ''
   kubectl config view --merge --flatten > ~/.kube/merged/config
 
   export KUBECONFIG=~/.kube/merged/config
+  export NVIM_APPNAME="nvim-J4de"
 '';
   };
 }

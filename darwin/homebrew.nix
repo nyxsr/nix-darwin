@@ -30,6 +30,7 @@
      "discord"
      "apidog"
      "google-cloud-sdk"
+     "ghostty"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997;

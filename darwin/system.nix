@@ -36,7 +36,7 @@
              	"/System/Applications/Calendar.app"
              	"/Applications/Zed.app"
              	"/Applications/Discord.app"
-              "/Applications/Alacritty.app"
+              "/Applications/Ghostty.app"
               "/Applications/Obsidian.app"
              	"/System/Applications/System Settings.app"
              	"/Applications/Whatsapp.app"
