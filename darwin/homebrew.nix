@@ -16,7 +16,6 @@
       "lolcat"
     ];
     casks = [
-  	 "opera"
   	 "orbstack"
      "nikitabobko/tap/aerospace"
      "figma"
@@ -29,6 +28,8 @@
      "apidog"
      "google-cloud-sdk"
      "ghostty"
+     "zen"
+     "zen-browser"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997;
