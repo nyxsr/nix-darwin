@@ -32,7 +32,7 @@
 initContent = ''
   reload_darwin() {
     cd ~/.config/nix-darwin
-    darwin-rebuild switch --flake ".#sahrulramdan"
+    sudo darwin-rebuild switch --flake ".#sahrulramdan"
   }
 
   app_id() {

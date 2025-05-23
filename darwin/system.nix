@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   system = {
+    primaryUser = "sahrulramdan";
     defaults = {
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
@@ -36,6 +37,7 @@
              	"/System/Applications/Calendar.app"
              	"/Applications/Discord.app"
               "/Applications/Ghostty.app"
+              "/Applications/Warp.app"
               "/Applications/Obsidian.app"
              	"/System/Applications/System Settings.app"
              	"/Applications/Whatsapp.app"

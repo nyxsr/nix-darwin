@@ -30,6 +30,7 @@
      "ghostty"
      "zen"
      "zen-browser"
+     "warp"
     ];
    	masApps = {
   	 "Whatsapp Messenger" = 310633997;
