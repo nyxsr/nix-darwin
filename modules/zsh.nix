@@ -46,6 +46,8 @@ initContent = ''
 
   export KUBECONFIG=~/.kube/merged/config
   export NVIM_APPNAME="nvim-J4de"
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
 '';
   };
 }

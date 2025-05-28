@@ -16,25 +16,25 @@
       "lolcat"
     ];
     casks = [
-  	 "orbstack"
-     "nikitabobko/tap/aerospace"
-     "figma"
-     "obsidian"
-     "google-chrome"
-     "ubersicht"
-     "alacritty"
-     "pika"
-     "discord"
-     "apidog"
-     "google-cloud-sdk"
-     "ghostty"
-     "zen"
-     "zen-browser"
-     "warp"
+      "orbstack"
+      "nikitabobko/tap/aerospace"
+      "figma"
+      "obsidian"
+      "google-chrome"
+      "ubersicht"
+      "alacritty"
+      "pika"
+      "discord"
+      "apidog"
+      "google-cloud-sdk"
+      "ghostty"
+      "zen"
+      "zen-browser"
+      "medis"
     ];
-   	masApps = {
-  	 "Whatsapp Messenger" = 310633997;
-     "Amphetamine" = 937984704;
-   	};
+    masApps = {
+      "Whatsapp Messenger" = 310633997;
+      "Amphetamine" = 937984704;
+    };
   };
 }
