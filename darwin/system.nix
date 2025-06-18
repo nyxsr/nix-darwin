@@ -33,7 +33,7 @@
          	wvous-tl-corner = 1;
          	wvous-tr-corner = 1;
          	persistent-apps = [
-             	"/Applications/Zen.app"
+             	"/Applications/Opera.app"
              	"/System/Applications/Calendar.app"
              	"/Applications/Discord.app"
               "/Applications/Ghostty.app"
