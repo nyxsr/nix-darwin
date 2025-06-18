@@ -28,9 +28,8 @@
       "apidog"
       "google-cloud-sdk"
       "ghostty"
-      "zen"
-      "zen-browser"
       "medis"
+      "opera"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;

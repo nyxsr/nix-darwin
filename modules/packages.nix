@@ -26,7 +26,6 @@
     lazydocker
     lazygit
     repomix
-    thefuck
     tree
     zoxide
     oh-my-posh
