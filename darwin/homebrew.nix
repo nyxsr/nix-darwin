@@ -22,7 +22,6 @@
       "obsidian"
       "google-chrome"
       "ubersicht"
-      "alacritty"
       "pika"
       "discord"
       "apidog"
@@ -30,6 +29,8 @@
       "ghostty"
       "medis"
       "opera"
+      "visual-studio-code"
+      "mongodb-compass"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;

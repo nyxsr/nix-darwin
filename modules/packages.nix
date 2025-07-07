@@ -3,6 +3,7 @@
 {
   # Define packages to be installed for the user via Home Manager
   home.packages = with pkgs; [
+    rustc
     go
     cargo
     neovim
@@ -44,6 +45,7 @@
     openblas
     kubectl
     kubernetes-helm
+    pnpm
   ];
 
 }
