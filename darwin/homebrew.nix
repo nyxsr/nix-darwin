@@ -31,6 +31,7 @@
       "opera"
       "visual-studio-code"
       "mongodb-compass"
+      "keycastr"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;
