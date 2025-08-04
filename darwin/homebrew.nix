@@ -10,10 +10,12 @@
       "homebrew/cask"
       "nikitabobko/tap"
       "FelixKratz/formulae"
+      "encoredev/tap"
     ];
     brews = [
       "borders"
       "lolcat"
+      "encore"
     ];
     casks = [
       "orbstack"
@@ -25,13 +27,13 @@
       "pika"
       "discord"
       "apidog"
-      "google-cloud-sdk"
       "ghostty"
       "medis"
       "opera"
       "visual-studio-code"
       "mongodb-compass"
       "keycastr"
+      "raycast"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;

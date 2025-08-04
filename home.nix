@@ -4,7 +4,6 @@
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/packages.nix
-    ./modules/tmux.nix
   ];
 
   home.username = "sahrulramdan";

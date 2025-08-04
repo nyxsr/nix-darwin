@@ -3,11 +3,12 @@
 {
   # Define packages to be installed for the user via Home Manager
   home.packages = with pkgs; [
+    claude-code
+    rsync
     rustc
     go
     cargo
     neovim
-    act
     doggo
     k9s
     kubectx
@@ -17,14 +18,12 @@
     mas
     devenv
     nixd
-    zellij
     bat
     fzf
     ripgrep
     jq
     neofetch
     htop
-    lazydocker
     lazygit
     repomix
     tree
@@ -39,6 +38,7 @@
     pkg-config
     ffmpeg
     imagemagick
+    ghostscript
     graphicsmagick
     flac
     python311Packages.numpy
