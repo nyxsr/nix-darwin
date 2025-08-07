@@ -22,21 +22,21 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 | `Cmd + D` | Split Horizontal | Splits the current pane horizontally (side by side) |
 | `Cmd + Shift + D` | Split Vertical | Splits the current pane vertically (top and bottom) |
 
-### Navigating Between Panes
+### Navigating Between Panes (Vim-style)
 | Shortcut | Action | Description |
 |----------|--------|-------------|
-| `Cmd + Alt + ←` | Move Left | Switch focus to the pane on the left |
-| `Cmd + Alt + →` | Move Right | Switch focus to the pane on the right |
-| `Cmd + Alt + ↑` | Move Up | Switch focus to the pane above |
-| `Cmd + Alt + ↓` | Move Down | Switch focus to the pane below |
+| `Cmd + Alt + H` | Move Left | Switch focus to the pane on the left |
+| `Cmd + Alt + L` | Move Right | Switch focus to the pane on the right |
+| `Cmd + Alt + K` | Move Up | Switch focus to the pane above |
+| `Cmd + Alt + J` | Move Down | Switch focus to the pane below |
 
-### Resizing Panes
+### Resizing Panes (Vim-style)
 | Shortcut | Action | Description |
 |----------|--------|-------------|
-| `Cmd + Shift + ←` | Resize Left | Decrease pane width by 5 units |
-| `Cmd + Shift + →` | Resize Right | Increase pane width by 5 units |
-| `Cmd + Shift + ↑` | Resize Up | Decrease pane height by 5 units |
-| `Cmd + Shift + ↓` | Resize Down | Increase pane height by 5 units |
+| `Cmd + Shift + H` | Resize Left | Decrease pane width by 5 units |
+| `Cmd + Shift + L` | Resize Right | Increase pane width by 5 units |
+| `Cmd + Shift + K` | Resize Up | Decrease pane height by 5 units |
+| `Cmd + Shift + J` | Resize Down | Increase pane height by 5 units |
 
 ### Closing Panes
 | Shortcut | Action | Description |
@@ -194,9 +194,10 @@ These are additional default shortcuts that work alongside your custom configura
 
 ### Productivity Tips
 1. **Quick Navigation**: Use `Cmd + numbers` to quickly jump between tabs
-2. **Efficient Pane Layout**: Start with `Cmd + D` for horizontal split, then use `Cmd + Shift + D` for vertical splits within panes
-3. **URL Opening**: Simply `Cmd + Click` on any URL to open it in your default browser
-4. **Fast Selection**: Use `Cmd + Shift + U` to quickly select and copy URLs, file paths, or git commit hashes
+2. **Vim-style Pane Control**: Navigate panes with `Cmd + Alt + HJKL` and resize with `Cmd + Shift + HJKL`
+3. **Efficient Pane Layout**: Start with `Cmd + D` for horizontal split, then use `Cmd + Shift + D` for vertical splits within panes
+4. **URL Opening**: Simply `Cmd + Click` on any URL to open it in your default browser
+5. **Fast Selection**: Use `Cmd + Shift + U` to quickly select and copy URLs, file paths, or git commit hashes
 
 ### Customization Notes
 - Font size defaults to 14.0 and uses JetBrainsMono Nerd Font

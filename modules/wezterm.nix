@@ -23,9 +23,9 @@
 
       -- Font configuration
       config.font = wezterm.font_with_fallback {
+        'Hack Nerd Font',
         'JetBrainsMono Nerd Font',
         'FiraCode Nerd Font',
-        'Hack Nerd Font',
         'SF Mono',
       }
       config.font_size = 14.0
@@ -86,46 +86,46 @@
           action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
         },
 
-        -- Navigate panes
+        -- Navigate panes (vim-style)
         {
-          key = 'LeftArrow',
+          key = 'h',
           mods = 'CMD|ALT',
           action = wezterm.action.ActivatePaneDirection 'Left',
         },
         {
-          key = 'RightArrow',
+          key = 'l',
           mods = 'CMD|ALT',
           action = wezterm.action.ActivatePaneDirection 'Right',
         },
         {
-          key = 'UpArrow',
+          key = 'k',
           mods = 'CMD|ALT',
           action = wezterm.action.ActivatePaneDirection 'Up',
         },
         {
-          key = 'DownArrow',
+          key = 'j',
           mods = 'CMD|ALT',
           action = wezterm.action.ActivatePaneDirection 'Down',
         },
 
-        -- Resize panes
+        -- Resize panes (vim-style)
         {
-          key = 'LeftArrow',
+          key = 'h',
           mods = 'CMD|SHIFT',
           action = wezterm.action.AdjustPaneSize { 'Left', 5 },
         },
         {
-          key = 'RightArrow',
+          key = 'l',
           mods = 'CMD|SHIFT',
           action = wezterm.action.AdjustPaneSize { 'Right', 5 },
         },
         {
-          key = 'UpArrow',
+          key = 'k',
           mods = 'CMD|SHIFT',
           action = wezterm.action.AdjustPaneSize { 'Up', 5 },
         },
         {
-          key = 'DownArrow',
+          key = 'j',
           mods = 'CMD|SHIFT',
           action = wezterm.action.AdjustPaneSize { 'Down', 5 },
         },
