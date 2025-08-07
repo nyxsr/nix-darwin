@@ -72,6 +72,9 @@
       config.animation_fps = 60
       config.enable_wayland = false
 
+      -- Set default shell to ensure proper PATH
+      config.default_prog = { '/bin/zsh', '-l' }
+
       -- Key bindings
       config.keys = {
         -- Split panes
@@ -232,19 +235,19 @@
         -- },
       }
 
-      -- Launch menu items
+      -- Launch menu items (using shell to ensure proper PATH)
       config.launch_menu = {
         {
           label = 'btop',
-          args = { 'btop' },
+          args = { '/bin/zsh', '-l', '-c', 'btop' },
         },
         {
           label = 'lazygit',
-          args = { 'lazygit' },
+          args = { '/bin/zsh', '-l', '-c', 'lazygit' },
         },
         {
           label = 'k9s',
-          args = { 'k9s' },
+          args = { '/bin/zsh', '-l', '-c', 'k9s' },
         },
       }
 
