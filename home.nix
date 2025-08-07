@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/packages.nix
+    ./modules/wezterm.nix
   ];
 
   home.username = "sahrulramdan";

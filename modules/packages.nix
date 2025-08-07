@@ -18,6 +18,7 @@
     mas
     devenv
     nixd
+    nil
     bat
     fzf
     ripgrep

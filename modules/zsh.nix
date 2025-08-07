@@ -2,8 +2,8 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       lg = "lazygit";
       ydev = "yarn dev";

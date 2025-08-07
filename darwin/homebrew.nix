@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   homebrew = {
     enable = true;
     onActivation = {
@@ -21,7 +22,6 @@
       "orbstack"
       "nikitabobko/tap/aerospace"
       "figma"
-      "obsidian"
       "google-chrome"
       "ubersicht"
       "pika"
@@ -34,6 +34,8 @@
       "mongodb-compass"
       "keycastr"
       "raycast"
+      "zed"
+      "wezterm"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;
