@@ -10,6 +10,7 @@
     ./modules/git.nix
     ./modules/packages.nix
     ./modules/alacritty.nix
+    ./modules/tmux.nix
   ];
 
   home.username = "sahrulramdan";
