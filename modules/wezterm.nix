@@ -11,11 +11,65 @@
     extraConfig = ''
       local wezterm = require 'wezterm'
       local config = {}
+      local act = wezterm.action
 
       -- In newer versions of wezterm, use the config_builder which will
       -- help provide clearer error messages
       if wezterm.config_builder then
         config = wezterm.config_builder()
+      end
+
+      -- Session management helper functions
+      local home = wezterm.home_dir
+      local session_file = home .. '/.config/wezterm/saved_sessions.txt'
+
+      -- Function to save current session
+      local function save_session(window, pane)
+        local session_data = ""
+        local tabs = window:tabs()
+
+        for _, tab in ipairs(tabs) do
+          local panes = tab:panes()
+          for _, p in ipairs(panes) do
+            local cwd = p:get_current_working_dir()
+            if cwd then
+              session_data = session_data .. cwd.file_path .. "\n"
+            end
+          end
+        end
+
+        -- Write to file
+        local file = io.open(session_file, "w")
+        if file then
+          file:write(session_data)
+          file:close()
+          window:toast_notification("WezTerm", "Session saved!", nil, 2000)
+        end
+      end
+
+      -- Function to restore session
+      local function restore_session(window, pane)
+        local file = io.open(session_file, "r")
+        if file then
+          local first = true
+          for line in file:lines() do
+            if line ~= "" then
+              if first then
+                -- Use current tab for first directory
+                pane:send_text("cd " .. line .. "\n")
+                first = false
+              else
+                -- Create new tabs for additional directories
+                window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
+                window:active_tab():active_pane():send_text("cd " .. line .. "\n")
+              end
+            end
+          end
+          file:close()
+          window:toast_notification("WezTerm", "Session restored!", nil, 2000)
+        else
+          window:toast_notification("WezTerm", "No saved session found", nil, 2000)
+        end
       end
 
       -- Color scheme
@@ -79,8 +133,7 @@
       config.exit_behavior = "CloseOnCleanExit"
       config.exit_behavior_messaging = "Verbose"
 
-      -- Workspace restoration
-      -- Save session automatically
+      -- Status update interval
       config.status_update_interval = 1000
 
       -- Key bindings
@@ -211,13 +264,15 @@
         {
           key = 's',
           mods = 'CMD|SHIFT|ALT',
-          action = wezterm.action.SaveNamedWorkspace 'main',
+          action = wezterm.action_callback(save_session),
         },
         {
           key = 'r',
           mods = 'CMD|SHIFT|ALT',
-          action = wezterm.action.LoadNamedWorkspace 'main',
+          action = wezterm.action_callback(restore_session),
         },
+
+        -- Workspace management
         {
           key = 'w',
           mods = 'CMD|SHIFT|ALT',
@@ -240,6 +295,13 @@
                 )
               end
             end),
+          },
+        },
+        {
+          key = 'l',
+          mods = 'CMD|SHIFT|ALT',
+          action = wezterm.action.ShowLauncherArgs {
+            flags = 'FUZZY|WORKSPACES',
           },
         },
       }
@@ -360,39 +422,36 @@
 
       -- Auto-save session on exit
       wezterm.on('window-close-requested', function(window, pane)
-        local workspace = window:active_workspace()
-        window:perform_action(
-          wezterm.action.SaveNamedWorkspace(workspace),
-          pane
-        )
-        return false -- Allow the window to close
+        save_session(window, pane)
+        return false -- Allow window to close
       end)
 
-      -- Restore last session on startup
+      -- Restore previous workspace on startup with auto-restore option
       wezterm.on('gui-startup', function(cmd)
-        local args = {}
-        if cmd then
-          args = cmd.args
-        end
+        -- The mux is the multiplexer that manages windows, tabs and panes
+        local mux = wezterm.mux
 
-        -- Try to restore the last workspace
-        local success, stdout = wezterm.run_child_process({
-          'ls', wezterm.home_dir .. '/.local/share/wezterm'
-        })
+        -- Create a new window with default workspace
+        local tab, pane, window = mux.spawn_window(cmd or {})
 
-        if success then
-          -- Open default window
-          local tab, pane, window = wezterm.mux.spawn_window {
-            workspace = 'default',
-            args = args,
-          }
+        -- Auto-restore last session (optional - uncomment to enable)
+        -- if you want auto-restore on startup, uncomment the next lines:
+        -- wezterm.sleep_ms(100)
+        -- restore_session(window, pane)
+      end)
 
-          -- You can uncomment this to auto-load a saved workspace on startup
-          -- window:perform_action(
-          --   wezterm.action.LoadNamedWorkspace 'main',
-          --   pane
-          -- )
-        end
+      -- Quick session switcher using workspaces
+      wezterm.on('update-right-status', function(window, pane)
+        -- Show current workspace and number of tabs
+        local workspace = window:active_workspace()
+        local tabs = window:tabs()
+        local tab_count = #tabs
+
+        window:set_right_status(wezterm.format({
+          { Background = { Color = '#282828' } },
+          { Foreground = { Color = '#928374' } },
+          { Text = ' Tabs: ' .. tab_count .. ' ' },
+        }))
       end)
 
       return config

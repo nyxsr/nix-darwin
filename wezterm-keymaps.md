@@ -143,10 +143,11 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 ### Session Management
 | Shortcut | Action | Description |
 |----------|--------|-------------|
-| `Cmd + Shift + Alt + S` | Save Workspace | Saves the current workspace layout as 'main' |
-| `Cmd + Shift + Alt + R` | Restore Workspace | Restores the saved 'main' workspace layout |
+| `Cmd + Shift + Alt + S` | Save Session | Saves current tabs and their working directories |
+| `Cmd + Shift + Alt + R` | Restore Session | Restores saved tabs with their directories |
 | `Cmd + Shift + Alt + W` | Switch to Default | Switches to the default workspace |
 | `Cmd + Shift + Alt + N` | New Workspace | Prompts for a name and creates a new workspace |
+| `Cmd + Shift + Alt + L` | List Workspaces | Shows fuzzy finder to switch between workspaces |
 
 ### Launcher Menu Items
 The launcher menu (`Cmd + Shift + L`) includes quick access to:
@@ -201,15 +202,18 @@ These are additional default shortcuts that work alongside your custom configura
 ## Tips and Tricks
 
 ### Session Persistence
-WezTerm can save and restore your workspace layouts, including:
-- All open tabs and their names
-- Pane splits and arrangements
-- Working directories for each pane
-- Running processes (will restart shell in saved directories)
+WezTerm can save and restore your session, including:
+- All open tabs
+- Working directories for each tab
+- Number of tabs in your session
 
-**Auto-save on Exit**: The configuration automatically saves your workspace when closing WezTerm.
+**Auto-save on Exit**: The configuration automatically saves your session when closing WezTerm.
 
-**Workspace Status**: The current workspace name is displayed in the left side of the tab bar.
+**Session File**: Sessions are saved to `~/.config/wezterm/saved_sessions.txt`
+
+**Workspace Status**: The current workspace name is displayed in the left side of the tab bar, with tab count on the right.
+
+**Toast Notifications**: You'll see notifications when sessions are saved or restored.
 
 ### Productivity Tips
 1. **Quick Navigation**: Use `Cmd + numbers` to quickly jump between tabs
@@ -217,8 +221,9 @@ WezTerm can save and restore your workspace layouts, including:
 3. **Efficient Pane Layout**: Start with `Cmd + D` for horizontal split, then use `Cmd + Shift + D` for vertical splits within panes
 4. **URL Opening**: Simply `Cmd + Click` on any URL to open it in your default browser
 5. **Fast Selection**: Use `Cmd + Shift + U` to quickly select and copy URLs, file paths, or git commit hashes
-6. **Session Management**: Save your workspace with `Cmd + Shift + Alt + S` and restore it later with `Cmd + Shift + Alt + R`
+6. **Session Management**: Save your tabs and directories with `Cmd + Shift + Alt + S` and restore them with `Cmd + Shift + Alt + R`
 7. **Multiple Workspaces**: Create different workspaces for different projects using `Cmd + Shift + Alt + N`
+8. **Workspace Switching**: Use `Cmd + Shift + Alt + L` to see and switch between all workspaces
 
 ### Customization Notes
 - Font size defaults to 14.0 and uses JetBrainsMono Nerd Font
