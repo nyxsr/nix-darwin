@@ -211,20 +211,19 @@
             mods = "Command";
             action = "Quit";
           }
-          {
-            key = "W";
-            mods = "Command";
-            action = "CloseWindow";
-          }
+          # Note: Alacritty doesn't have a CloseWindow action
+          # Use Cmd+Q to quit or close the window manually
           {
             key = "N";
             mods = "Command";
             action = "CreateNewWindow";
           }
+          # Alacritty doesn't support tabs - use tmux instead
+          # This binding will spawn a new window
           {
             key = "T";
             mods = "Command";
-            action = "CreateNewTab";
+            action = "CreateNewWindow";
           }
           {
             key = "M";
@@ -242,62 +241,10 @@
             action = "HideOtherApplications";
           }
 
-          # Tab management
-          {
-            key = "Tab";
-            mods = "Control";
-            action = "SelectNextTab";
-          }
-          {
-            key = "Tab";
-            mods = "Control|Shift";
-            action = "SelectPreviousTab";
-          }
-          {
-            key = "1";
-            mods = "Command";
-            action = "SelectTab1";
-          }
-          {
-            key = "2";
-            mods = "Command";
-            action = "SelectTab2";
-          }
-          {
-            key = "3";
-            mods = "Command";
-            action = "SelectTab3";
-          }
-          {
-            key = "4";
-            mods = "Command";
-            action = "SelectTab4";
-          }
-          {
-            key = "5";
-            mods = "Command";
-            action = "SelectTab5";
-          }
-          {
-            key = "6";
-            mods = "Command";
-            action = "SelectTab6";
-          }
-          {
-            key = "7";
-            mods = "Command";
-            action = "SelectTab7";
-          }
-          {
-            key = "8";
-            mods = "Command";
-            action = "SelectTab8";
-          }
-          {
-            key = "9";
-            mods = "Command";
-            action = "SelectLastTab";
-          }
+          # Note: Alacritty doesn't support native tabs
+          # Consider using tmux or screen for multiple sessions
+          # Tab selection keybindings removed - Alacritty doesn't support native tabs
+          # Use tmux or screen for tab/window management within Alacritty
 
           # Font size controls
           {
@@ -316,7 +263,7 @@
             action = "DecreaseFontSize";
           }
           {
-            key = "Key0";
+            key = "0";
             mods = "Command";
             action = "ResetFontSize";
           }
@@ -490,18 +437,18 @@
             action = "Right";
           }
           {
-            key = "Key0";
+            key = "0";
             mode = "Vi|~Search";
             action = "First";
           }
           {
-            key = "Key4";
+            key = "4";
             mods = "Shift";
             mode = "Vi|~Search";
             action = "Last";
           }
           {
-            key = "Key6";
+            key = "6";
             mods = "Shift";
             mode = "Vi|~Search";
             action = "FirstOccupied";
@@ -558,7 +505,7 @@
             action = "WordRightEnd";
           }
           {
-            key = "Key5";
+            key = "5";
             mods = "Shift";
             mode = "Vi|~Search";
             action = "Bracket";
@@ -637,13 +584,6 @@
             key = "Return";
             mods = "Command|Shift";
             action = "ToggleFullscreen";
-          }
-
-          # Debug
-          {
-            key = "D";
-            mods = "Command|Shift";
-            action = "Debug";
           }
         ];
       };

@@ -21,7 +21,6 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 | Shortcut | Action | Description |
 |----------|--------|-------------|
 | `Cmd + Q` | Quit | Quit Alacritty completely |
-| `Cmd + W` | Close Window | Close the current window |
 | `Cmd + N` | New Window | Create a new Alacritty window |
 | `Cmd + M` | Minimize | Minimize the current window |
 | `Cmd + H` | Hide | Hide Alacritty |
@@ -32,20 +31,19 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 
 ## Tab Management
 
+**Note: Alacritty does not support native tabs.** Consider using a terminal multiplexer like tmux or screen for tab/window management.
+
 | Shortcut | Action | Description |
 |----------|--------|-------------|
-| `Cmd + T` | New Tab | Create a new tab |
-| `Ctrl + Tab` | Next Tab | Switch to the next tab |
-| `Ctrl + Shift + Tab` | Previous Tab | Switch to the previous tab |
-| `Cmd + 1` | Select Tab 1 | Jump to tab 1 |
-| `Cmd + 2` | Select Tab 2 | Jump to tab 2 |
-| `Cmd + 3` | Select Tab 3 | Jump to tab 3 |
-| `Cmd + 4` | Select Tab 4 | Jump to tab 4 |
-| `Cmd + 5` | Select Tab 5 | Jump to tab 5 |
-| `Cmd + 6` | Select Tab 6 | Jump to tab 6 |
-| `Cmd + 7` | Select Tab 7 | Jump to tab 7 |
-| `Cmd + 8` | Select Tab 8 | Jump to tab 8 |
-| `Cmd + 9` | Select Last Tab | Jump to the last tab |
+| `Cmd + T` | New Window | Opens a new Alacritty window (not a tab) |
+| `Cmd + N` | New Window | Create a new Alacritty window |
+
+For tab-like functionality within Alacritty, install and use **tmux**:
+- `tmux new-session` - Start new tmux session
+- `Ctrl + b, c` - Create new tmux window (tab)
+- `Ctrl + b, n` - Next tmux window
+- `Ctrl + b, p` - Previous tmux window
+- `Ctrl + b, 0-9` - Switch to tmux window by number
 
 ---
 
@@ -205,7 +203,7 @@ When URL hints are activated, clickable URLs are highlighted and can be opened i
 2. **Quick URL Opening**: `Cmd + Shift + U` highlights all URLs for quick access
 3. **Efficient Selection**: Use Vi mode's visual selections for precise text copying
 4. **Search Navigation**: Use `/` in Vi mode for vim-style searching
-5. **Tab Management**: Use `Cmd + numbers` to quickly jump between tabs
+5. **Window Management**: Use `Cmd + N` for new windows, or use tmux for tabs
 6. **Clear Screen**: `Cmd + K` clears both screen and scrollback buffer
 
 ### Common Workflows
