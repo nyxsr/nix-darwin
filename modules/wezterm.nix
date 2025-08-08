@@ -75,6 +75,14 @@
       -- Set default shell to ensure proper PATH
       config.default_prog = { '/bin/zsh', '-l' }
 
+      -- Session persistence
+      config.exit_behavior = "CloseOnCleanExit"
+      config.exit_behavior_messaging = "Verbose"
+
+      -- Workspace restoration
+      -- Save session automatically
+      config.status_update_interval = 1000
+
       -- Key bindings
       config.keys = {
         -- Split panes
@@ -198,6 +206,42 @@
           mods = 'CMD|SHIFT',
           action = wezterm.action.ShowLauncher,
         },
+
+        -- Session management
+        {
+          key = 's',
+          mods = 'CMD|SHIFT|ALT',
+          action = wezterm.action.SaveNamedWorkspace 'main',
+        },
+        {
+          key = 'r',
+          mods = 'CMD|SHIFT|ALT',
+          action = wezterm.action.LoadNamedWorkspace 'main',
+        },
+        {
+          key = 'w',
+          mods = 'CMD|SHIFT|ALT',
+          action = wezterm.action.SwitchToWorkspace {
+            name = 'default',
+          },
+        },
+        {
+          key = 'n',
+          mods = 'CMD|SHIFT|ALT',
+          action = wezterm.action.PromptInputLine {
+            description = 'Enter workspace name:',
+            action = wezterm.action_callback(function(window, pane, line)
+              if line then
+                window:perform_action(
+                  wezterm.action.SwitchToWorkspace {
+                    name = line,
+                  },
+                  pane
+                )
+              end
+            end),
+          },
+        },
       }
 
       -- Mouse bindings
@@ -300,6 +344,55 @@
         end
 
         return ' ' .. title .. ' '
+      end)
+
+      -- Workspace status in tab bar
+      wezterm.on('update-status', function(window, pane)
+        local workspace = window:active_workspace()
+        local workspace_text = 'Workspace: ' .. workspace .. ' '
+
+        window:set_left_status(wezterm.format({
+          { Background = { Color = '#3c3836' } },
+          { Foreground = { Color = '#ebdbb2' } },
+          { Text = ' ' .. workspace_text },
+        }))
+      end)
+
+      -- Auto-save session on exit
+      wezterm.on('window-close-requested', function(window, pane)
+        local workspace = window:active_workspace()
+        window:perform_action(
+          wezterm.action.SaveNamedWorkspace(workspace),
+          pane
+        )
+        return false -- Allow the window to close
+      end)
+
+      -- Restore last session on startup
+      wezterm.on('gui-startup', function(cmd)
+        local args = {}
+        if cmd then
+          args = cmd.args
+        end
+
+        -- Try to restore the last workspace
+        local success, stdout = wezterm.run_child_process({
+          'ls', wezterm.home_dir .. '/.local/share/wezterm'
+        })
+
+        if success then
+          -- Open default window
+          local tab, pane, window = wezterm.mux.spawn_window {
+            workspace = 'default',
+            args = args,
+          }
+
+          -- You can uncomment this to auto-load a saved workspace on startup
+          -- window:perform_action(
+          --   wezterm.action.LoadNamedWorkspace 'main',
+          --   pane
+          -- )
+        end
       end)
 
       return config

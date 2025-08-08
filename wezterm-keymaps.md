@@ -140,6 +140,14 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 | `Cmd + ,` | Open Config | Opens WezTerm configuration file |
 | `Cmd + Shift + P` | Command Palette | Opens command palette |
 
+### Session Management
+| Shortcut | Action | Description |
+|----------|--------|-------------|
+| `Cmd + Shift + Alt + S` | Save Workspace | Saves the current workspace layout as 'main' |
+| `Cmd + Shift + Alt + R` | Restore Workspace | Restores the saved 'main' workspace layout |
+| `Cmd + Shift + Alt + W` | Switch to Default | Switches to the default workspace |
+| `Cmd + Shift + Alt + N` | New Workspace | Prompts for a name and creates a new workspace |
+
 ### Launcher Menu Items
 The launcher menu (`Cmd + Shift + L`) includes quick access to:
 - **btop** - System resource monitor
@@ -192,12 +200,25 @@ These are additional default shortcuts that work alongside your custom configura
 
 ## Tips and Tricks
 
+### Session Persistence
+WezTerm can save and restore your workspace layouts, including:
+- All open tabs and their names
+- Pane splits and arrangements
+- Working directories for each pane
+- Running processes (will restart shell in saved directories)
+
+**Auto-save on Exit**: The configuration automatically saves your workspace when closing WezTerm.
+
+**Workspace Status**: The current workspace name is displayed in the left side of the tab bar.
+
 ### Productivity Tips
 1. **Quick Navigation**: Use `Cmd + numbers` to quickly jump between tabs
 2. **Vim-style Pane Control**: Navigate panes with `Cmd + Alt + HJKL` and resize with `Cmd + Shift + HJKL`
 3. **Efficient Pane Layout**: Start with `Cmd + D` for horizontal split, then use `Cmd + Shift + D` for vertical splits within panes
 4. **URL Opening**: Simply `Cmd + Click` on any URL to open it in your default browser
 5. **Fast Selection**: Use `Cmd + Shift + U` to quickly select and copy URLs, file paths, or git commit hashes
+6. **Session Management**: Save your workspace with `Cmd + Shift + Alt + S` and restore it later with `Cmd + Shift + Alt + R`
+7. **Multiple Workspaces**: Create different workspaces for different projects using `Cmd + Shift + Alt + N`
 
 ### Customization Notes
 - Font size defaults to 14.0 and uses JetBrainsMono Nerd Font
