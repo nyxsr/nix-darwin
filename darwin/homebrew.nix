@@ -35,7 +35,7 @@
       "keycastr"
       "raycast"
       "zed"
-      "wezterm"
+      "alacritty"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;

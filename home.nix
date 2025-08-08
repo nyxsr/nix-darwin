@@ -9,7 +9,7 @@
     ./modules/zsh.nix
     ./modules/git.nix
     ./modules/packages.nix
-    ./modules/wezterm.nix
+    ./modules/alacritty.nix
   ];
 
   home.username = "sahrulramdan";
