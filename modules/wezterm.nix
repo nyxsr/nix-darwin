@@ -21,63 +21,133 @@
 
       -- Session management helper functions
       local home = wezterm.home_dir
-      local session_file = home .. '/.config/wezterm/saved_sessions.txt'
+      local session_file = home .. '/.config/wezterm/saved_sessions.lua'
 
-      -- Function to save current session
+      -- Function to save current session with pane layouts
       local function save_session(window, pane)
-        local session_lines = {}
-        local tabs = window:tabs()
+        local session_data = {
+          tabs = {},
+          workspace = window:active_workspace()
+        }
 
-        for _, tab in ipairs(tabs) do
+        local tabs = window:tabs()
+        for tab_idx, tab in ipairs(tabs) do
+          local tab_info = {
+            title = tab:get_title(),
+            panes = {},
+            layout = {}
+          }
+
+          -- Get all panes in the tab
           local panes = tab:panes()
-          for _, p in ipairs(panes) do
+          local pane_tree = tab:panes_with_info()
+
+          -- Save pane information
+          for _, pane_info in ipairs(pane_tree) do
+            local p = pane_info.pane
             local cwd = p:get_current_working_dir()
-            if cwd then
-              table.insert(session_lines, cwd.file_path)
-            end
+            table.insert(tab_info.panes, {
+              index = pane_info.index,
+              is_active = pane_info.is_active,
+              width = pane_info.width,
+              height = pane_info.height,
+              left = pane_info.left,
+              top = pane_info.top,
+              cwd = cwd and cwd.file_path or home
+            })
           end
+
+          table.insert(session_data.tabs, tab_info)
         end
 
-        -- Write to file
+        -- Write session data
         local file = io.open(session_file, "w")
         if file then
-          for _, path in ipairs(session_lines) do
-            file:write(path .. "\n")
-          end
+          file:write("return " .. wezterm.to_string(session_data))
           file:close()
-          wezterm.log_info("Session saved with " .. #session_lines .. " directories")
-          window:toast_notification("WezTerm", "Session saved! (" .. #session_lines .. " dirs)", nil, 2000)
+
+          local pane_count = 0
+          for _, tab in ipairs(session_data.tabs) do
+            pane_count = pane_count + #tab.panes
+          end
+
+          wezterm.log_info("Session saved: " .. #tabs .. " tabs, " .. pane_count .. " panes")
+          window:toast_notification("WezTerm", "Session saved! (" .. #tabs .. " tabs, " .. pane_count .. " panes)", nil, 3000)
         end
       end
 
-      -- Function to restore session
+      -- Function to restore session with pane layouts
       local function restore_session(window, pane)
         local file = io.open(session_file, "r")
         if file then
-          local dirs = {}
-          for line in file:lines() do
-            if line ~= "" then
-              table.insert(dirs, line)
-            end
-          end
+          local content = file:read("*a")
           file:close()
 
-          if #dirs > 0 then
-            -- Use first directory in current tab
-            pane:send_text("cd \"" .. dirs[1] .. "\"\n")
+          local session_func = load(content)
+          if session_func then
+            local ok, session_data = pcall(session_func)
+            if ok and session_data and session_data.tabs then
+              -- Close current empty tab if needed
+              local current_tabs = window:tabs()
+              local close_first = #current_tabs == 1
 
-            -- Create new tabs for remaining directories
-            for i = 2, #dirs do
-              window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
-              wezterm.sleep_ms(100)
-              window:active_tab():active_pane():send_text("cd \"" .. dirs[i] .. "\"\n")
+              for tab_idx, tab_info in ipairs(session_data.tabs) do
+                if tab_idx == 1 and close_first then
+                  -- Use existing tab for first one
+                  if #tab_info.panes > 0 then
+                    pane:send_text("cd \"" .. tab_info.panes[1].cwd .. "\"\n")
+
+                    -- Create additional panes in first tab
+                    for pane_idx = 2, #tab_info.panes do
+                      local pane_data = tab_info.panes[pane_idx]
+                      -- Determine split direction based on position
+                      if pane_idx == 2 then
+                        -- First split - usually horizontal
+                        window:perform_action(act.SplitHorizontal { domain = 'CurrentPaneDomain' }, pane)
+                      else
+                        -- Subsequent splits - alternate or based on layout
+                        window:perform_action(act.SplitVertical { domain = 'CurrentPaneDomain' }, pane)
+                      end
+                      wezterm.sleep_ms(100)
+                      window:active_tab():active_pane():send_text("cd \"" .. pane_data.cwd .. "\"\n")
+                    end
+                  end
+                else
+                  -- Create new tab
+                  window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
+                  wezterm.sleep_ms(100)
+                  local new_tab = window:active_tab()
+                  local new_pane = new_tab:active_pane()
+
+                  if #tab_info.panes > 0 then
+                    new_pane:send_text("cd \"" .. tab_info.panes[1].cwd .. "\"\n")
+
+                    -- Create additional panes
+                    for pane_idx = 2, #tab_info.panes do
+                      local pane_data = tab_info.panes[pane_idx]
+                      if pane_idx == 2 then
+                        window:perform_action(act.SplitHorizontal { domain = 'CurrentPaneDomain' }, new_pane)
+                      else
+                        window:perform_action(act.SplitVertical { domain = 'CurrentPaneDomain' }, new_pane)
+                      end
+                      wezterm.sleep_ms(100)
+                      window:active_tab():active_pane():send_text("cd \"" .. pane_data.cwd .. "\"\n")
+                    end
+                  end
+                end
+              end
+
+              -- Switch back to first tab
+              window:perform_action(act.ActivateTab(0), pane)
+
+              local pane_count = 0
+              for _, tab in ipairs(session_data.tabs) do
+                pane_count = pane_count + #tab.panes
+              end
+
+              wezterm.log_info("Session restored: " .. #session_data.tabs .. " tabs, " .. pane_count .. " panes")
+              window:toast_notification("WezTerm", "Session restored! (" .. #session_data.tabs .. " tabs, " .. pane_count .. " panes)", nil, 3000)
             end
-
-            -- Switch back to first tab
-            window:perform_action(act.ActivateTab(0), pane)
-
-            wezterm.log_info("Session restored with " .. #dirs .. " directories")
-            window:toast_notification("WezTerm", "Session restored! (" .. #dirs .. " tabs)", nil, 2000)
           end
         else
           window:toast_notification("WezTerm", "No saved session found", nil, 2000)
@@ -272,7 +342,7 @@
           action = wezterm.action.ShowLauncher,
         },
 
-        -- Session management
+        -- Session management (saves pane layouts)
         {
           key = 's',
           mods = 'CMD|SHIFT|ALT',
@@ -282,6 +352,12 @@
           key = 'r',
           mods = 'CMD|SHIFT|ALT',
           action = wezterm.action_callback(restore_session),
+        },
+        -- Quick save/restore with simpler keys
+        {
+          key = 's',
+          mods = 'CMD|SHIFT',
+          action = wezterm.action_callback(save_session),
         },
 
         -- Workspace management
@@ -444,36 +520,14 @@
         local tab, pane, window = mux.spawn_window(cmd or {})
 
         -- Check if session file exists and restore
-        local session_file = home .. '/.config/wezterm/saved_sessions.txt'
+        local session_file = home .. '/.config/wezterm/saved_sessions.lua'
         local file = io.open(session_file, "r")
         if file then
-          local dirs = {}
-          for line in file:lines() do
-            if line ~= "" then
-              table.insert(dirs, line)
-            end
-          end
           file:close()
-
-          if #dirs > 0 then
-            -- Restore directories after small delay
-            wezterm.time.call_after(0.5, function()
-              -- First directory in current tab
-              pane:send_text("cd \"" .. dirs[1] .. "\"\n")
-
-              -- Create new tabs for remaining directories
-              for i = 2, #dirs do
-                window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
-                wezterm.sleep_ms(100)
-                window:active_tab():active_pane():send_text("cd \"" .. dirs[i] .. "\"\n")
-              end
-
-              -- Switch back to first tab
-              window:perform_action(act.ActivateTab(0), pane)
-
-              wezterm.log_info("Auto-restored session with " .. #dirs .. " tabs")
-            end)
-          end
+          -- Restore after small delay to ensure window is ready
+          wezterm.time.call_after(0.5, function()
+            restore_session(window, pane)
+          end)
         end
       end)
 

@@ -140,11 +140,12 @@ This document provides a comprehensive reference for all keyboard shortcuts conf
 | `Cmd + ,` | Open Config | Opens WezTerm configuration file |
 | `Cmd + Shift + P` | Command Palette | Opens command palette |
 
-### Session Management
+### Session Management (with Pane Layouts)
 | Shortcut | Action | Description |
 |----------|--------|-------------|
-| `Cmd + Shift + Alt + S` | Save Session | Saves current tabs and their working directories |
-| `Cmd + Shift + Alt + R` | Restore Session | Restores saved tabs with their directories |
+| `Cmd + Shift + S` | Quick Save Session | Saves all tabs, panes, splits, and working directories |
+| `Cmd + Shift + Alt + S` | Save Session | Saves current tabs, panes, and their layouts |
+| `Cmd + Shift + Alt + R` | Restore Session | Restores saved tabs with pane splits and directories |
 | `Cmd + Shift + Alt + W` | Switch to Default | Switches to the default workspace |
 | `Cmd + Shift + Alt + N` | New Workspace | Prompts for a name and creates a new workspace |
 | `Cmd + Shift + Alt + L` | List Workspaces | Shows fuzzy finder to switch between workspaces |
@@ -201,19 +202,29 @@ These are additional default shortcuts that work alongside your custom configura
 
 ## Tips and Tricks
 
-### Session Persistence
-WezTerm can save and restore your session, including:
-- All open tabs
-- Working directories for each tab
-- Number of tabs in your session
+### Session Persistence with Pane Layouts
+WezTerm can save and restore your complete workspace, including:
+- All open tabs and their titles
+- **Pane splits and layouts** (horizontal/vertical splits)
+- Working directories for each pane
+- Number of panes in each tab
+- Complete window layout restoration
 
-**Auto-save on Exit**: The configuration automatically saves your session when closing WezTerm.
+**How to Save Your Pane Layout**:
+1. Set up your workspace with tabs and pane splits (use `Cmd + D` for horizontal, `Cmd + Shift + D` for vertical)
+2. Navigate to different directories in each pane
+3. Press `Cmd + Shift + S` to quickly save the entire layout
+4. You'll see a toast notification showing tabs and panes saved
 
-**Session File**: Sessions are saved to `~/.config/wezterm/saved_sessions.txt`
+**Auto-save on Exit**: The configuration automatically saves your complete layout when closing WezTerm.
+
+**Auto-restore on Startup**: When you open WezTerm, it automatically restores your last saved session with all pane layouts.
+
+**Session File**: Sessions are saved to `~/.config/wezterm/saved_sessions.lua` (includes layout data)
 
 **Workspace Status**: The current workspace name is displayed in the left side of the tab bar, with tab count on the right.
 
-**Toast Notifications**: You'll see notifications when sessions are saved or restored.
+**Toast Notifications**: You'll see notifications showing the number of tabs and panes saved/restored.
 
 ### Productivity Tips
 1. **Quick Navigation**: Use `Cmd + numbers` to quickly jump between tabs
@@ -221,9 +232,11 @@ WezTerm can save and restore your session, including:
 3. **Efficient Pane Layout**: Start with `Cmd + D` for horizontal split, then use `Cmd + Shift + D` for vertical splits within panes
 4. **URL Opening**: Simply `Cmd + Click` on any URL to open it in your default browser
 5. **Fast Selection**: Use `Cmd + Shift + U` to quickly select and copy URLs, file paths, or git commit hashes
-6. **Session Management**: Save your tabs and directories with `Cmd + Shift + Alt + S` and restore them with `Cmd + Shift + Alt + R`
-7. **Multiple Workspaces**: Create different workspaces for different projects using `Cmd + Shift + Alt + N`
-8. **Workspace Switching**: Use `Cmd + Shift + Alt + L` to see and switch between all workspaces
+6. **Complete Session Save**: Press `Cmd + Shift + S` to save your entire workspace including all pane layouts
+7. **Session Management**: Save layouts with `Cmd + Shift + Alt + S` and restore them with `Cmd + Shift + Alt + R`
+8. **Multiple Workspaces**: Create different workspaces for different projects using `Cmd + Shift + Alt + N`
+9. **Workspace Switching**: Use `Cmd + Shift + Alt + L` to see and switch between all workspaces
+10. **Pane Layout Persistence**: Your exact pane arrangement is preserved and restored automatically
 
 ### Customization Notes
 - Font size defaults to 14.0 and uses JetBrainsMono Nerd Font
