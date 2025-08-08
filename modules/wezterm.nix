@@ -25,7 +25,7 @@
 
       -- Function to save current session
       local function save_session(window, pane)
-        local session_data = ""
+        local session_lines = {}
         local tabs = window:tabs()
 
         for _, tab in ipairs(tabs) do
@@ -33,7 +33,7 @@
           for _, p in ipairs(panes) do
             local cwd = p:get_current_working_dir()
             if cwd then
-              session_data = session_data .. cwd.file_path .. "\n"
+              table.insert(session_lines, cwd.file_path)
             end
           end
         end
@@ -41,9 +41,12 @@
         -- Write to file
         local file = io.open(session_file, "w")
         if file then
-          file:write(session_data)
+          for _, path in ipairs(session_lines) do
+            file:write(path .. "\n")
+          end
           file:close()
-          window:toast_notification("WezTerm", "Session saved!", nil, 2000)
+          wezterm.log_info("Session saved with " .. #session_lines .. " directories")
+          window:toast_notification("WezTerm", "Session saved! (" .. #session_lines .. " dirs)", nil, 2000)
         end
       end
 
@@ -51,29 +54,38 @@
       local function restore_session(window, pane)
         local file = io.open(session_file, "r")
         if file then
-          local first = true
+          local dirs = {}
           for line in file:lines() do
             if line ~= "" then
-              if first then
-                -- Use current tab for first directory
-                pane:send_text("cd " .. line .. "\n")
-                first = false
-              else
-                -- Create new tabs for additional directories
-                window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
-                window:active_tab():active_pane():send_text("cd " .. line .. "\n")
-              end
+              table.insert(dirs, line)
             end
           end
           file:close()
-          window:toast_notification("WezTerm", "Session restored!", nil, 2000)
+
+          if #dirs > 0 then
+            -- Use first directory in current tab
+            pane:send_text("cd \"" .. dirs[1] .. "\"\n")
+
+            -- Create new tabs for remaining directories
+            for i = 2, #dirs do
+              window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
+              wezterm.sleep_ms(100)
+              window:active_tab():active_pane():send_text("cd \"" .. dirs[i] .. "\"\n")
+            end
+
+            -- Switch back to first tab
+            window:perform_action(act.ActivateTab(0), pane)
+
+            wezterm.log_info("Session restored with " .. #dirs .. " directories")
+            window:toast_notification("WezTerm", "Session restored! (" .. #dirs .. " tabs)", nil, 2000)
+          end
         else
           window:toast_notification("WezTerm", "No saved session found", nil, 2000)
         end
       end
 
       -- Color scheme
-      config.color_scheme = 'Gruvbox Dark (Gogh)'
+      config.color_scheme = 'Selenized Black (Gogh)'
 
       -- Font configuration
       config.font = wezterm.font_with_fallback {
@@ -426,18 +438,43 @@
         return false -- Allow window to close
       end)
 
-      -- Restore previous workspace on startup with auto-restore option
+      -- Auto-restore session on startup
       wezterm.on('gui-startup', function(cmd)
-        -- The mux is the multiplexer that manages windows, tabs and panes
         local mux = wezterm.mux
-
-        -- Create a new window with default workspace
         local tab, pane, window = mux.spawn_window(cmd or {})
 
-        -- Auto-restore last session (optional - uncomment to enable)
-        -- if you want auto-restore on startup, uncomment the next lines:
-        -- wezterm.sleep_ms(100)
-        -- restore_session(window, pane)
+        -- Check if session file exists and restore
+        local session_file = home .. '/.config/wezterm/saved_sessions.txt'
+        local file = io.open(session_file, "r")
+        if file then
+          local dirs = {}
+          for line in file:lines() do
+            if line ~= "" then
+              table.insert(dirs, line)
+            end
+          end
+          file:close()
+
+          if #dirs > 0 then
+            -- Restore directories after small delay
+            wezterm.time.call_after(0.5, function()
+              -- First directory in current tab
+              pane:send_text("cd \"" .. dirs[1] .. "\"\n")
+
+              -- Create new tabs for remaining directories
+              for i = 2, #dirs do
+                window:perform_action(act.SpawnTab 'CurrentPaneDomain', pane)
+                wezterm.sleep_ms(100)
+                window:active_tab():active_pane():send_text("cd \"" .. dirs[i] .. "\"\n")
+              end
+
+              -- Switch back to first tab
+              window:perform_action(act.ActivateTab(0), pane)
+
+              wezterm.log_info("Auto-restored session with " .. #dirs .. " tabs")
+            end)
+          end
+        end
       end)
 
       -- Quick session switcher using workspaces
