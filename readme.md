@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Nix](https://img.shields.io/badge/Built%20With-Nix-5277C3?style=for-the-badge&logo=nixos&logoColor=white)](https://nixos.org)
-[![macOS](https://img.shields.io/badge/macOS-Sonoma+-292e33?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos)
+[![macOS](https://img.shields.io/badge/macOS-Sequoia+-292e33?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 A **declarative**, **reproducible**, and **modular** macOS configuration using Nix Darwin, Home Manager, and Homebrew.
@@ -49,7 +49,7 @@ A **declarative**, **reproducible**, and **modular** macOS configuration using N
 ### 🎨 **Customized Experience**
 - Optimized macOS settings
 - ZSH with Oh My Zsh
-- Developer fonts included
+- Developer fonts (JetBrains Mono, Fira Code)
 
 </td>
 </tr>
@@ -67,7 +67,7 @@ A **declarative**, **reproducible**, and **modular** macOS configuration using N
 
 ```bash
 # 1. Clone this configuration
-git clone https://github.com/yourusername/nix-darwin-config ~/.config/nix-darwin
+git clone https://github.com/nyxsr/nix-darwin ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 
 # 2. Apply the configuration
@@ -95,6 +95,7 @@ exec zsh
     ├── git.nix            # Git settings & aliases
     ├── packages.nix       # Development tools
     ├── theme.nix          # Color themes (unused)
+    ├── tmux.nix           # Terminal multiplexer config
     └── zsh.nix            # Shell configuration
 ```
 
@@ -165,10 +166,13 @@ shellAliases = {
 `Docker` `Kubernetes` `Terraform` `AWS CLI` `Google Cloud SDK`
 
 ### Productivity Apps
-`Warp` `Raycast` `Arc Browser` `Notion` `Linear` `Figma`
+`Visual Studio Code` `Zed` `Medis` `MongoDB Compass` `KeyCastr` `Opera`
 
 ### CLI Utilities
-`fzf` `ripgrep` `bat` `eza` `zoxide` `starship` `tmux`
+`fzf` `ripgrep` `bat` `eza` `zoxide` `starship` `tmux` `neovim` `git` `htop`
+
+### Terminal & Fonts
+`Ghostty` `JetBrains Mono Nerd Font` `Fira Code` `Hack Nerd Font`
 
 ## 🤝 Contributing
 
