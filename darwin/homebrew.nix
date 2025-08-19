@@ -30,12 +30,10 @@
       "ghostty"
       "medis"
       "opera"
-      "visual-studio-code"
       "mongodb-compass"
       "keycastr"
-      "raycast"
       "zed"
-      "alacritty"
+      "visual-studio-code"
     ];
     masApps = {
       "Whatsapp Messenger" = 310633997;

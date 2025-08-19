@@ -1,7 +1,9 @@
-{ config, pkgs, ...} : {
+{ config, pkgs, ... }:
+{
   fonts.packages = [
     pkgs.nerd-fonts.hack
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.fira-code
+    pkgs.nerd-fonts.fira-code
   ];
 }
