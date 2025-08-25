@@ -17,6 +17,8 @@
       "borders"
       "lolcat"
       "encore"
+      "argocd"
+      "kubeseal"
     ];
     casks = [
       "orbstack"
